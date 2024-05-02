@@ -1,57 +1,25 @@
-# This config was automatically generated from your source code
-# Stacks detected: cicd:github-actions:.github/workflows,deps:node:.
-version: 2.1
-orbs:
-  node: circleci/node@5
-jobs:
-  test-node:
-    # Install node dependencies and run tests
-    executor: node/default
-    steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: npm
+version: 2.1 # use CircleCI 2.0
+orbs: 
+    snyk: snyk/snyk@1.1.2
+jobs: # a collection of steps
+  build: # runs not using Workflows must have a `build` job as entry point
+    working_directory: ~/nodejs-goof # directory where steps will run
+    docker: # run the steps with Docker
+      - image: circleci/node # ...with this image as the primary container; this is where all `steps` will run
+    steps: # a collection of executable commands
+      - checkout # special step to check out source code to working directory
       - run:
-          name: Run tests
-          command: npm test --passWithNoTests
-  build-node:
-    # Build node project
-    executor: node/default
-    steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: npm
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
       - run:
-          command: npm run build
-      - run:
-          name: Create the ~/artifacts directory if it doesn't exist
-          command: mkdir -p ~/artifacts
-      # Copy output to artifacts dir
-      - run:
-          name: Copy artifacts
-          command: cp -R build dist public .output .next .docusaurus ~/artifacts 2>/dev/null || true
-      - store_artifacts:
-          path: ~/artifacts
-          destination: node-build
-  deploy:
-    # This is an example deploy job, not actually used by the workflow
-    docker:
-      - image: cimg/base:stable
-    steps:
-      # Replace this with steps to deploy to users
-      - run:
-          name: deploy
-          command: '#e.g. ./deploy.sh'
-      - run:
-          name: found github actions config
-          command: ':'
-workflows:
-  build-and-test:
-    jobs:
-      - test-node
-      - build-node:
-          requires:
-            - test-node
-    # - deploy:
-    #     requires:
-    #       - build-node
+          name: install-snyk
+          command: 'sudo npm install -g snyk'     
+      - run: # run snyk help - test snyk is installed and working
+          name: snyk-help
+          command: snyk --help
+      - run: # run snyk auth - authenticate snyk use environment variables to add token
+          name: snyk auth
+          command: snyk auth $SNYK_TOKEN
+      - run: # run snyk test - run snyk test
+          name: snyk test
+          command: snyk test
