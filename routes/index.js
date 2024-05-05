@@ -196,6 +196,7 @@ exports.destroy = function (req, res, next) {
 // what branch
 // what branch 3
 // what brancg 4
+// what branch 55
     try {
       todo.remove(function (err, todo) {
         if (err) return next(err);
