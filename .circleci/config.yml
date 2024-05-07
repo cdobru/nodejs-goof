@@ -23,6 +23,6 @@ jobs: # a collection of steps
       - run: # run snyk test - run snyk test without failing the build
           name: snyk test
           command: snyk test || true
-      - run: # run snyk monitor - run snyk monitor
+      - run: # run snyk monitor - run snyk monitor bla bla
           name: snyk monitor
           command: snyk monitor
