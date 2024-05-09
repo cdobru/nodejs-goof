@@ -57,36 +57,12 @@ function adminLoginSuccess(redirectPage, session, username, res) {
   // Log the login action for audit
   console.log(`User logged in: ${username}`)
 
-  if (redirectPage) {
-      return res.redirect(redirectPage)
+  if (redirectPage && validator.isURL(redirectPage)) {
+      return res.redirect(301, redirectPage)
   } else {
       return res.redirect('/admin')
   }
 }
-
-exports.login = function (req, res, next) {
-  return res.render('admin', {
-    title: 'Admin Access',
-    granted: false,
-    redirectPage: req.query.redirectPage
-  });
-};
-
-exports.login = function (req, res, next) {
-  return res.render('admin', {
-    title: 'Admin Access',
-    granted: false,
-    redirectPage: req.query.redirectPage
-  });
-};
-
-exports.login = function (req, res, next) {
-  return res.render('admin', {
-    title: 'Admin Access',
-    granted: false,
-    redirectPage: req.query.redirectPage
-  });
-};
 
 exports.login = function (req, res, next) {
   return res.render('admin', {
@@ -104,6 +80,14 @@ exports.admin = function (req, res, next) {
 };
 // test
 // test2
+var RateLimit = require('express-rate-limit')
+var limiter = new RateLimit({
+  windowMs: parseInt(process.env.WINDOW_MS, 10),
+  max: parseInt(process.env.MAX_IP_REQUESTS, 10),
+  delayMs:parseInt(process.env.DELAY_MS, 10),
+  headers: true
+});
+app.user(limiter);
 exports.get_account_details = function(req, res, next) {
   // @TODO need to add a database call to get the profile from the database
   // and provide it to the view to display

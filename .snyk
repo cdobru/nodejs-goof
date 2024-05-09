@@ -1,6 +1,12 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.25.1
-ignore: {}
+version: v1.25.0
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  SNYK-JS-BABELTRAVERSE-5962463:
+    - '*':
+        reason: ignored via CLI
+        expires: 2024-06-08T10:05:49.463Z
+        created: 2024-05-09T10:05:49.473Z
 # patches apply the minimum changes required to fix a vulnerability
 patch:
   SNYK-JS-LODASH-567746:

@@ -42,7 +42,7 @@ app.use(methodOverride());
 app.use(session({
   secret: 'keyboard cat',
   name: 'connect.sid',
-  cookie: { path: '/' }
+  cookie: { path: '/', secure: true }
 }))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -80,9 +80,9 @@ if (app.get('env') == 'development') {
   app.use(errorHandler());
 }
 
-var token = 'SECRET_TOKEN_f8ed84e8f41e4146403dd4a6bbcea5e418d23a9';
+var token = process.env.SECRET_TOKEN_f8ed84e8f41e4146403dd4a6bbcea5e418d23a9;
 console.log('token: ' + token);
 
-http.createServer(app).listen(app.get('port'), function () {
+https.createServer(app).listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
 });

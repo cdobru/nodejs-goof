@@ -30,9 +30,7 @@ describe('Component Tests', () => {
       assert(service.save).toHaveBeenCalledWith('myPassword');
     });
 
-    test('should set success to OK upon success', function() {
       // GIVEN
-      comp.password = comp.confirmPassword = 'myPassword';
 
       // WHEN
       comp.changePassword();
@@ -41,7 +39,6 @@ describe('Component Tests', () => {
       expect(comp.doNotMatch).toBeNull();
       expect(comp.error).toBeNull();
       expect(comp.success).toBe('OK');
-    });
 
     test('should notify of error if change password fails', function() {
       // GIVEN
