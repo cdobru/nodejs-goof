@@ -72,14 +72,6 @@ exports.login = function (req, res, next) {
   });
 };
 
-exports.login = function (req, res, next) {
-  return res.render('admin', {
-    title: 'Admin Access',
-    granted: false,
-    redirectPage: req.query.redirectPage
-  });
-};
-
 exports.admin = function (req, res, next) {
   return res.render('admin', {
     title: 'Admin Access Granted',
