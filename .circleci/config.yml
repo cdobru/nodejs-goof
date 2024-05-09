@@ -22,7 +22,7 @@ jobs: # a collection of steps
           command: snyk auth $SNYK_TOKEN
       - run: # run snyk test - run snyk test without failing the build
           name: snyk test
-          command: snyk test || true
+          command: snyk test --severity-threshold=critical
       - run: # run snyk monitor - run snyk monitor
           name: snyk monitor
           command: snyk monitor
