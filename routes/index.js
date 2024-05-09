@@ -72,14 +72,6 @@ exports.login = function (req, res, next) {
   });
 };
 
-exports.login = function (req, res, next) {
-  return res.render('admin', {
-    title: 'Admin Access',
-    granted: false,
-    redirectPage: req.query.redirectPage
-  });
-};
-
 // test
 exports.admin = function (req, res, next) {
   return res.render('admin', {
@@ -239,6 +231,19 @@ exports.edit = function (req, res, next) {
         current: req.params.id
       });
     });
+};
+
+exports.update = function (req, res, next) {
+  Todo.findById(req.params.id, function (err, todo) {
+
+    todo.content = req.body.content;
+    todo.updated_at = Date.now();
+    todo.save(function (err, todo, count) {
+      if (err) return next(err);
+
+      res.redirect('/');
+    });
+  });
 };
 
 exports.update = function (req, res, next) {
