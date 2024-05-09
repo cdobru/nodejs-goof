@@ -20,7 +20,7 @@ jobs: # a collection of steps
       - run: # run snyk auth - authenticate snyk use environment variables to add token
           name: snyk auth
           command: snyk auth $SNYK_TOKEN
-      - run: # run snyk test - run snyk test without failing the build
+      - run: # run snyk test - run snyk test and only fail build on critical issues
           name: snyk test
           command: snyk test --severity-threshold=critical
       - run: # run snyk monitor - run snyk monitor
