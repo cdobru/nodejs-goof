@@ -28,4 +28,4 @@ jobs: # a collection of steps
           command: snyk monitor
       - run: # run snyk code test
           name: snyk code test
-          command: snyk code test --severity-threshold=high || true
+          command: snyk code test --severity-threshold=high
