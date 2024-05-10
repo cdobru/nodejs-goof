@@ -28,7 +28,9 @@ jobs: # a collection of steps
           command: snyk test --severity-threshold=critical --json-file-output=open-source-results.json || true
       - run:
           name: generate Snyk HTML report for open source
-          command: cat open-source-results.json | snyk-to-html -o open-source-results.html        
+          command: cat open-source-results.json | snyk-to-html -o open-source-results.html
+      - store_artifacts:
+          path: open-source-results.html          
       - run: # run snyk monitor - run snyk monitor
           name: snyk monitor
           command: snyk monitor
@@ -40,4 +42,3 @@ jobs: # a collection of steps
           command: cat code-results.json | snyk-to-html -o code-results.html
       - store_artifacts:
           path: code-results.html
-          path: open-source-results.html
