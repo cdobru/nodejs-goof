@@ -17,6 +17,9 @@ jobs: # a collection of steps
       - run: # run snyk help - test snyk is installed and working
           name: snyk-help
           command: snyk --help
+      - run:
+          name: install-snyk-to-html
+          command: 'sudo npm install snyk-to-html -g'        
       - run: # run snyk auth - authenticate snyk use environment variables to add token
           name: snyk auth
           command: snyk auth $SNYK_TOKEN
@@ -28,4 +31,6 @@ jobs: # a collection of steps
           command: snyk monitor
       - run: # run snyk code test
           name: snyk code test
-          command: snyk code test --severity-threshold=high
+          command: snyk code test --json | snyk-to-html -o results-code.html --severity-threshold=high || true
+      - store_artifacts:
+          path: results-code.html   
