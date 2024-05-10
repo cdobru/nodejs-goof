@@ -31,6 +31,9 @@ jobs: # a collection of steps
           command: snyk monitor
       - run: # run snyk code test
           name: snyk code test
-          command: snyk code test --severity-threshold=high --json | snyk-to-html -o results-code.html || true
+          command: snyk code test --severity-threshold=high --json-file-output=code-results.json
+      - run:
+          name: Generate Snyk HTML report
+          command: cat code-results.json | snyk-to-html -o code-results.html
       - store_artifacts:
-          path: results-code.html   
+          path: code-results.html   
