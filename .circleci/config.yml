@@ -31,6 +31,6 @@ jobs: # a collection of steps
           command: snyk monitor
       - run: # run snyk code test
           name: snyk code test
-          command: snyk code test --json | snyk-to-html -o results-code.html --severity-threshold=high || true
+          command: snyk code test --severity-threshold=high --json | snyk-to-html -o results-code.html || true
       - store_artifacts:
           path: results-code.html   
