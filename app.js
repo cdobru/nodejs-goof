@@ -25,7 +25,7 @@ var dust = require('dustjs-linkedin');
 var dustHelpers = require('dustjs-helpers');
 var cons = require('consolidate');
 const hbs = require('hbs')
-// var app = express();
+var app = express();
 app.use(helmet());
 var routes = require('./routes');
 var routesUsers = require('./routes/users.js')
@@ -40,7 +40,6 @@ cons.dust.helpers = dustHelpers;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(logger('dev'));
-// deepcode ignore HardcodedNonCryptoSecret: <please specify a reason of ignoring this>
 app.use(methodOverride());
 app.use(session({
   secret: 'keyboard cat',
