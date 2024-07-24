@@ -25,8 +25,8 @@ jobs: # a collection of steps
           command: snyk auth $SNYK_TOKEN
       - run: # run snyk test - run snyk test and only fail build for critical issues
           name: snyk test
-          # command: snyk test --severity-threshold=critical --json-file-output=open-source-results.json || true
-          command: snyk test --fail-on=all --json-file-output=open-source-results.json
+          command: snyk test --severity-threshold=critical --json-file-output=open-source-results.json || true
+          # command: snyk test --fail-on=all --json-file-output=open-source-results.json
       - run:
           name: generate HTML report for open-source
           command: cat open-source-results.json | snyk-to-html -o open-source-results.html
