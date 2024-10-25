@@ -7,6 +7,11 @@ ignore:
         reason: None Given
         expires: 2024-06-08T16:18:57.448Z
         created: 2024-05-09T16:18:57.456Z
+  SNYK-JS-EJS-2803307:
+    - '*':
+        reason: None Given
+        expires: 2024-11-23T13:26:28.165Z
+        created: 2024-10-24T13:26:28.302Z
 patch: {}
 exclude:
   global:
