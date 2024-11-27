@@ -40,7 +40,7 @@ jobs: # a collection of steps
  #         command: snyk code test --severity-threshold=high --json-file-output=code-results.json || true
       - run: # run snyk container test
           name: snyk container test
-          command: snyk container test cdobru/snyk-juice-shop || true
+          command: snyk container test cdobru/juice-shop-cd-2 || true
           # --username=cdobru --password=dockeR1t%@$%
  #    - run: # generate html for code
  #         name: generate HTML report for code
