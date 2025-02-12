@@ -1,5 +1,5 @@
 # FROM node:6-stretch
-FROM node:18.20.5
+FROM node:18.20.6
 
 RUN apt-get install -y imagemagick
 
