@@ -35,9 +35,9 @@ jobs: # a collection of steps
  #     - run: # run snyk monitor - run snyk monitor
  #         name: snyk monitor
  #         command: snyk monitor
- #     - run: # run snyk code test
- #         name: snyk code test
- #         command: snyk code test --severity-threshold=high --json-file-output=code-results.json || true
+      - run: # run snyk code test
+          name: snyk code test YES
+          command: snyk code test --severity-threshold=high --json-file-output=code-results.json || true
       - run: # run snyk container test test
           name: snyk container test
           command: snyk container test cdobru/snyk-broker-cd-3 || true
