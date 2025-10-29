@@ -12,6 +12,11 @@ ignore:
         reason: None Given
         expires: 2024-11-23T13:26:28.165Z
         created: 2024-10-24T13:26:28.302Z
+  SNYK-JS-MONGOOSE-8623536:
+    - '*':
+        reason: None Given
+        expires: 2035-11-23T13:26:28.165Z
+        created: 2025-10-29T08:26:28.302Z
 patch: {}
 exclude:
   global:
